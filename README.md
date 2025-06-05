@@ -6,6 +6,10 @@ Dataset DOI: [10.5061/dryad.8gtht770d](10.5061/dryad.8gtht770d)
 
 We conducted the theoretical and simulation study of mixed halide double perovskites Cs2NaTlBr6-xClx based on the density functional theory. We investigated the structural, mechanical, and thermodynamic stability of the considered materials and electronic and optical properties to determine the material's potential as a candidate for optoelectronics. In HBD_Mixed_anions.zip, the different data types folder is for two pure double perovskites, such as Cs₂NaTlCl₆ & Cs₂NaTlBr₆. Further, the Cl2Br4, Cl4Br2 (x = 2, 4) in ClxBr6-xData33 and ClBr5, Cl3Br3, Cl5Br (x= 1, 3, 5) in ClxBr1-xpart4 files are arranged for Cs2NaTlBr6-xClx mixed halide double perovskites. In each of the folders, readers will find the dataset for the calculation of structural optimization or relaxation files (SR), self-consistent calculations (STR), structural properties (STRUC), band structure (Band), hybrid band structure (HSE), density of states (DOS), effective mass calculation (eff_M), mechanical properties (Elastic), and optical properties (OPTIC). If someone wants to perform the calculations, they need to have experience at least in VASP or similar tools for first-principles calculations in computational materials science.
 
+# Perovskite Material Insights Platform
+
+**⚛️ Live Interactive Dashboard: [https://santtosh19-perovskite-data-platform-appmain-dashboard-ujrjl4.streamlit.app/]** 
+
 ### Files and variables
 
 #### File: HBD\_Mixed\_anions.zip
