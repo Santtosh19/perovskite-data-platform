@@ -1,44 +1,115 @@
-# DFT Studies of the Role of Anion Variation in Physical Properties of Cs2NaTlBr6-xClx (x = 0, 1, 2, 3, 4, 5, and 6) Mixed Halide Double Perovskites for Optoelectronics
+# ⚛️ Perovskite Material Insights Platform  perovskite-data-platform
 
-Dataset DOI: [10.5061/dryad.8gtht770d](10.5061/dryad.8gtht770d)
+**Live Interactive Dashboard: https://santtosh19-perovskite-data-platform-appmain-dashboard-ujrjl4.streamlit.app/** 
 
-## Description of the data and file structure
+## 📖 Overview
 
-We conducted the theoretical and simulation study of mixed halide double perovskites Cs2NaTlBr6-xClx based on the density functional theory. We investigated the structural, mechanical, and thermodynamic stability of the considered materials and electronic and optical properties to determine the material's potential as a candidate for optoelectronics. In HBD_Mixed_anions.zip, the different data types folder is for two pure double perovskites, such as Cs₂NaTlCl₆ & Cs₂NaTlBr₆. Further, the Cl2Br4, Cl4Br2 (x = 2, 4) in ClxBr6-xData33 and ClBr5, Cl3Br3, Cl5Br (x= 1, 3, 5) in ClxBr1-xpart4 files are arranged for Cs2NaTlBr6-xClx mixed halide double perovskites. In each of the folders, readers will find the dataset for the calculation of structural optimization or relaxation files (SR), self-consistent calculations (STR), structural properties (STRUC), band structure (Band), hybrid band structure (HSE), density of states (DOS), effective mass calculation (eff_M), mechanical properties (Elastic), and optical properties (OPTIC). If someone wants to perform the calculations, they need to have experience at least in VASP or similar tools for first-principles calculations in computational materials science.
+This project presents an interactive platform for exploring the calculated properties of Cs₂NaTlBr₆₋ₓClₓ mixed halide double perovskites. Utilizing Density Functional Theory (DFT) simulation output data from the study by Hasan et al. (2025), this platform enables users to:
 
-# Perovskite Material Insights Platform
+*   Visualize how fundamental material properties (electronic, optical, mechanical) evolve with varying anion (Bromine/Chlorine) compositions.
+*   Interactively explore detailed electronic band structures, density of states, and optical spectra for each of the 7 studied compositions (x=0 to x=6).
+*   Identify potential design trade-offs between multiple desirable material characteristics.
+*   Obtain rapid estimations of key properties for untested intermediate compositions using trained surrogate models.
 
-**⚛️ Live Interactive Dashboard: [https://santtosh19-perovskite-data-platform-appmain-dashboard-ujrjl4.streamlit.app/]** 
+The primary goal is to make complex scientific data more accessible and actionable, facilitating a deeper understanding of these promising lead-free perovskite materials for potential optoelectronic applications.
 
-### Files and variables
+## ✨ Key Achievements & Features
 
-#### File: HBD\_Mixed\_anions.zip
+This project goes beyond simple data visualization by implementing an end-to-end data pipeline and a predictive component:
 
-**Description:** In this submitted file, we included the data files to carry out the calculations using the Vienna ab-initio simulation package (VASP). We divided all the dataset in a specific folder name so that any one can track all the data.
+1.  **Unified & Queryable Data Platform:**
+    *   **Challenge Addressed:** Raw DFT outputs are often in numerous, disparate file formats, making holistic analysis difficult.
+    *   **Solution:** Developed a robust Python-based data engineering pipeline to automatically parse, validate, and structure the diverse DFT output files into a centralized SQLite database. This involved creating custom parsers for specific scientific data formats.
+    *   **Benefit:** Enabled systematic querying, comprehensive property exploration, and served as the foundation for all subsequent advanced analyses.
 
-i. The four input files are always needed to perform a calculation in VASP. These files are POSCAR, POTCAR, INCAR, and KPOINTS.
+2.  **Predictive Surrogate Modeling:**
+    *   **Challenge Addressed:** DFT calculations are computationally expensive, limiting the number of compositions that can be simulated.
+    *   **Solution:** Trained surrogate models (Polynomial Regression and Gaussian Process Regression using Scikit-learn) on the 7 available DFT data points to predict key material properties (Direct Bandgap, Bulk Modulus, Debye Temperature) as a continuous function of anion concentration 'x'.
+    *   **Benefit:** Provides a novel capability for rapid property estimation for untested intermediate compositions, potentially guiding and accelerating future research by identifying promising 'x' values. GPR models also offer valuable uncertainty quantification for these predictions.
 
-ii. OUTCAR stores all the information regarding the calculations steps.
+3.  **Interactive Multi-Property Trade-Off Explorer:**
+    *   **Challenge Addressed:** Materials design often involves balancing multiple, sometimes competing, desirable properties.
+    *   **Solution:** Implemented interactive 3D visualizations (using Plotly) allowing users to simultaneously explore relationships between three user-selected scalar properties, colored by composition.
+    *   **Benefit:** Offers new visual insights into material design trade-offs and helps identify "Pareto-like" optimal compositions.
 
-iii. The information about the total density of states and partial density of states in tdos.dat and PDOS_USER1.dat, PDOS_USER2.dat, PDOS_USER3.dat, PDOS_USER4.dat, PDOS_USER5.dat files, respectively within the DOS folder.
+4.  **Comprehensive Interactive Dashboard:**
+    *   **Challenge Addressed:** Making complex scientific data easily explorable by a wider audience.
+    *   **Solution:** Developed a user-friendly web application using Streamlit.
+    *   **Benefit:** Transforms static research data into a dynamic tool, enhancing data accessibility and enabling user-driven exploration of trends, detailed material properties, and model predictions.
 
-iv. The bandgap related information will be found in BAND_GAP and for the illustration of the bandstructure, KLABELS, HIGH_SYMMETRY_POINTS, BAND.dat, REFORMATTED_BAND.dat are necessary files.
+## 🛠️ Tech Stack & Libraries
 
-v. We have used VPKIT.in file for calculations of the structural properties and effective mass of electron using different parameter settings.
+*   **Language:** Python 3.x
+*   **Data Manipulation & Analysis:** Pandas, NumPy
+*   **Database:** SQLite3 (managed via Python)
+*   **Data Parsing:** Custom Python scripts (using `os`, `pathlib`, `re`)
+*   **Machine Learning (Surrogate Models):** Scikit-learn (`PolynomialFeatures`, `LinearRegression`, `GaussianProcessRegressor`)
+*   **Model Persistence:** Joblib (`.pkl` files)
+*   **Data Visualization:** Matplotlib, Seaborn, Plotly (for interactive 3D plots)
+*   **Web Application Framework:** Streamlit
+*   **Version Control:** Git & GitHub
 
-vi. In OPTIC folder, all the parameters such as real and imaginary dielectric function in real.in and IMAG.in, absorption coefficient in ABSORPTION.dat, extinction coefficient in EXTINCTION.dat, energy loss function in ENERGY_LOSSSPECTRUM.dat, reflectivity of the material in REFLECTIVITY.dat, and refractive index in REFRACTIVE.dat files are arranged with respect to energy (eV).
 
-## Code/software
+## 🚀 Getting Started / How to Run Locally
 
-To visualize the unit cell of the compound (POSCAR), we used Vesta software. Further, all the calculations can be done by the VASP simulation package. Matplotlib is used to visualize all the graphs in this research. The .dat file store the output data for the each calculation in respective folders with proper nametag with them.
+### Prerequisites
+*   Python 3.9+
+*   Git
 
-## Access information
+### Setup & Installation
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/Santtosh19/perovskite-data-platform.git
+    cd perovskite-data-platform
+    ```
+2.  **Create and activate a Python virtual environment:**
+    ```bash
+    python -m venv venv
+    # On Windows:
+    # venv\Scripts\activate
+    # On macOS/Linux:
+    # source venv/bin/activate
+    ```
+3.  **Install dependencies:**
+    ```bash
+    pip install -r requirements.txt
+    ```
+4.  **(Data Acquisition - if `data/raw/HBD_Mixed_anions/` is not included in repo)**
+    *   Download the dataset `HBD_Mixed_anions.zip` from Dryad: [https://doi.org/10.5061/dryad.8gtht770d](https://doi.org/10.5061/dryad.8gtht770d)
+    *   Unzip it and place the contents (the `HBD_Mixed_anions` folder itself containing `Cs2NaTlCl6`, `Cs2NaTlBr6`, etc.) into the `data/raw/` directory of this project.
 
-Other publicly accessible locations of the data:
+### Running the Data Pipeline & Training Models
+To generate the SQLite database and train the surrogate models from scratch:
 
-* Not Applicable
+1.  **Run the file inventory script:**
+    ```bash
+    python ingestion_scripts/01_unzip_and_inventory.py
+    ```
+2.  **Run the data parsing and CSV generation script:**
+    ```bash
+    python ingestion_scripts/02_extract_and_structure_data.py
+    ```
+3.  **Build the SQLite database:**
+    ```bash
+    python ingestion_scripts/03_build_database.py
+    ```
+4.  **Train surrogate models (generates `.pkl` files in `models/`):**
+    *   Open and run the Jupyter Notebook: `notebooks/02_Surrogate_Modeling.ipynb`
 
-Data was derived from the following sources:
+*(Note: If the pre-populated `data/processed/perovskite_platform.sqlite` and pre-trained `models/*.pkl` files are included in the repository, you can skip the pipeline and training steps to directly run the dashboard).*
 
-* Vasp, Vaspkit, Vesta, Matplotlib
+### Running the Streamlit Dashboard
+Once the database and models are ready (either generated or included):
+```bash
+streamlit run app/main_dashboard.py
+```
 
+## 🔮 Future Work
+Incorporate HSE-level calculations for all properties across all compositions if data becomes available.
+Extend surrogate models to predict a wider range of properties and explore multi-target regression.
+Integrate experimental data for these compounds (if published) to validate DFT and model predictions.
+Develop more sophisticated tools for identifying optimal materials based on user-defined multi-objective criteria.
+
+## 👨‍💻 About the Author
+Santtosh G. Muniyandy
+GitHub: https://github.com/Santtosh19
